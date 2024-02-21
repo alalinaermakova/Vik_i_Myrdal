@@ -1,5 +1,5 @@
 'use client';
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import styles from '@/components/Intro/style.module.css';
 import Image from 'next/image';
 import gsap from 'gsap';
@@ -10,7 +10,7 @@ export default function Index() {
     const backgroundImg = useRef(null);
     const introImg = useRef(null);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         import("locomotive-scroll").then((locomotiveModule) => {
             scroll = new locomotiveModule.default({
                 el: document.querySelector("[data-scroll-container]"),

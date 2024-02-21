@@ -1,5 +1,5 @@
 import styles from '@/components/Description/style.module.css';
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -28,7 +28,7 @@ function AnimatedText({children}) {
 
     const text = useRef(null);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         import("locomotive-scroll").then((locomotiveModule) => {
             scroll = new locomotiveModule.default({
                 el: document.querySelector("[data-scroll-container]"),

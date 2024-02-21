@@ -1,23 +1,10 @@
 'use client'
-import { useEffect } from "react";
 import Index from '@/components/Intro';
 import Description from '@/components/Description';
 import Projects from '@/components/Projects';
 import styles from './page.module.css';
 
-
 export default function Home() {
-
-  useEffect( () => {
-    if (typeof window !== 'undefined') {
-    (
-      async () => {
-        const LocomotiveScroll = (await import('locomotive-scroll')).default;
-        const locomotiveScroll = new LocomotiveScroll();
-      }
-  )}
-  }, [])
-
   return (
     <main>
       <Index />

@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from 'next/image';
 import styles from './style.module.css';
 import gsap from 'gsap';
@@ -28,7 +28,7 @@ export default function Description() {
         }
     ];
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         import("locomotive-scroll").then((locomotiveModule) => {
             scroll = new locomotiveModule.default({
                 el: document.querySelector("[data-scroll-container]"),
