@@ -10,6 +10,8 @@ export default function Index() {
     const backgroundImg = useRef(null);
     const introImg = useRef(null);
 
+    // changed from useLayoutEffect
+    // runtime imports fixes the problem of undefined window in next.js
     useEffect(() => {
         import("locomotive-scroll").then((locomotiveModule) => {
             scroll = new locomotiveModule.default({
