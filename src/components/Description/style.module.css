@@ -1,0 +1,21 @@
+.description {
+    position: relative;
+    z-index: 1;
+    font-size: 3vh;
+    color: #fff;
+    text-transform: uppercase;
+    margin-top: 30vh;
+    margin-left: 10vw;
+}
+
+.description p {
+    margin-top: 0px;
+    position: relative;
+}
+
+@media screen and (max-width: 1055px) {
+    .description {
+        margin-left: 5vw;
+        margin-right: 5vw;
+    }
+}
