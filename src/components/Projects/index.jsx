@@ -1,7 +1,6 @@
 import { useState, useRef, useLayoutEffect } from "react";
 import Image from 'next/image';
 import styles from './style.module.css';
-import LocomotiveScroll from 'locomotive-scroll';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -30,11 +29,14 @@ export default function Description() {
     ];
 
     useLayoutEffect(() => {
-        if (typeof window !== 'undefined') {
-            const scroller = new LocomotiveScroll({
-                el: document.documentElement,
-                smooth: true
+        import("locomotive-scroll").then((locomotiveModule) => {
+            scroll = new locomotiveModule.default({
+                el: document.querySelector("[data-scroll-container]"),
+                smooth: true,
+                smoothMobile: false,
+                resetNativeScroll: true
             });
+        });
     
             gsap.registerPlugin(ScrollTrigger);
     
@@ -49,7 +51,6 @@ export default function Description() {
                 });
     
             return () => ctx.revert(); // <- cleanup!
-        }
         
     }, [])
 

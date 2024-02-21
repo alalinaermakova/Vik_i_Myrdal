@@ -2,7 +2,6 @@ import styles from '@/components/Description/style.module.css';
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import LocomotiveScroll from 'locomotive-scroll';
 
 export default function Description() {
 
@@ -30,12 +29,15 @@ function AnimatedText({children}) {
     const text = useRef(null);
 
     useLayoutEffect(() => {
-        if (typeof window !== 'undefined') {
-            const scroller = new LocomotiveScroll({
-                el: document.documentElement,
-                smooth: true
+        import("locomotive-scroll").then((locomotiveModule) => {
+            scroll = new locomotiveModule.default({
+                el: document.querySelector("[data-scroll-container]"),
+                smooth: true,
+                smoothMobile: false,
+                resetNativeScroll: true
             });
-    
+        });
+
             gsap.registerPlugin(ScrollTrigger);
     
             let ctx = gsap.context(() => {
@@ -53,7 +55,6 @@ function AnimatedText({children}) {
             })
     
             return () => ctx.revert(); // <- cleanup!
-        }
         
     }, [])
 
