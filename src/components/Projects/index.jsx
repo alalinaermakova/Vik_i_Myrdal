@@ -30,24 +30,26 @@ export default function Description() {
     ];
 
     useLayoutEffect(() => {
-        const scroller = new LocomotiveScroll({
-            el: document.documentElement,
-            smooth: true
-        });
-
-        gsap.registerPlugin(ScrollTrigger);
-
-        let ctx = gsap.context(() => {
-            
-            ScrollTrigger.create({
-                trigger: imageContainer.current,
-                start: '-=100pxpx',
-                end: document.body.offsetHeight,
-                pin: true
-            })
+        if (typeof window !== 'undefined') {
+            const scroller = new LocomotiveScroll({
+                el: document.documentElement,
+                smooth: true
             });
-
-        return () => ctx.revert(); // <- cleanup!
+    
+            gsap.registerPlugin(ScrollTrigger);
+    
+            let ctx = gsap.context(() => {
+                
+                ScrollTrigger.create({
+                    trigger: imageContainer.current,
+                    start: '-=100pxpx',
+                    end: document.body.offsetHeight,
+                    pin: true
+                })
+                });
+    
+            return () => ctx.revert(); // <- cleanup!
+        }
         
     }, [])
 

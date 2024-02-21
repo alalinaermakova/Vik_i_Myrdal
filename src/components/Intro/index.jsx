@@ -12,29 +12,31 @@ export default function Index() {
     const introImg = useRef(null);
 
     useLayoutEffect(() => {
-        const scroller = new LocomotiveScroll({
-            el: document.documentElement,
-            smooth: true
-        });
-
-        gsap.registerPlugin(ScrollTrigger);
-
-        let ctx = gsap.context(() => {
-            const timeline = gsap.timeline({
-                scrollTrigger: {
-                    trigger: document.documentElement,
-                    start: 'top',
-                    end: '+=500px',
-                    scrub: true,
-                },
-            })
-    
-            timeline
-                .from(backgroundImg.current, {clipPath: "inset(15%)"})
-                .to(introImg.current, {height: "200px"}, 0)
+        if (typeof window !== 'undefined') {
+            const scroller = new LocomotiveScroll({
+                el: document.documentElement,
+                smooth: true
             });
-
-        return () => ctx.revert(); // <- cleanup!
+    
+            gsap.registerPlugin(ScrollTrigger);
+    
+            let ctx = gsap.context(() => {
+                const timeline = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: document.documentElement,
+                        start: 'top',
+                        end: '+=500px',
+                        scrub: true,
+                    },
+                })
+        
+                timeline
+                    .from(backgroundImg.current, {clipPath: "inset(15%)"})
+                    .to(introImg.current, {height: "200px"}, 0)
+                });
+    
+            return () => ctx.revert(); // <- cleanup!
+        }
         
     }, [])
 

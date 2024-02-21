@@ -30,28 +30,30 @@ function AnimatedText({children}) {
     const text = useRef(null);
 
     useLayoutEffect(() => {
-        const scroller = new LocomotiveScroll({
-            el: document.documentElement,
-            smooth: true
-        });
-
-        gsap.registerPlugin(ScrollTrigger);
-
-        let ctx = gsap.context(() => {
-            gsap.from(text.current, {
-                scrollTrigger: {
-                    trigger: text.current,
-                    start: '0px bottom',
-                    end: 'bottom+=400px bottom',
-                    scrub: true
-                },
-                left: '-200px',
-                opacity: 0
+        if (typeof window !== 'undefined') {
+            const scroller = new LocomotiveScroll({
+                el: document.documentElement,
+                smooth: true
+            });
+    
+            gsap.registerPlugin(ScrollTrigger);
+    
+            let ctx = gsap.context(() => {
+                gsap.from(text.current, {
+                    scrollTrigger: {
+                        trigger: text.current,
+                        start: '0px bottom',
+                        end: 'bottom+=400px bottom',
+                        scrub: true
+                    },
+                    left: '-200px',
+                    opacity: 0
+                })
+    
             })
-
-        })
-
-        return () => ctx.revert(); // <- cleanup!
+    
+            return () => ctx.revert(); // <- cleanup!
+        }
         
     }, [])
 
